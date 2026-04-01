@@ -1,0 +1,45 @@
+{
+  "defaults": {
+    "size": "square",
+    "scale": 1,
+    "font_family": "'Noto Sans KR', sans-serif",
+    "title_font": "'Noto Serif KR', serif",
+    "accent_color": "#b08968",
+    "magazine_name": "MY MAGAZINE"
+  },
+  "posts": [
+    {
+      "template": "feed_text_overlay",
+      "title": "봄이 오는 길목에서",
+      "body": "따뜻한 바람이 불어오는 계절,\n우리는 다시 걷기 시작한다.",
+      "category": "ESSAY",
+      "image": "./sample/sample_photo.jpg"
+    },
+    {
+      "template": "feed_editorial",
+      "title": "서울의 숨은 카페를 찾아서",
+      "body": "골목 안쪽, 작은 문을 열면 펼쳐지는 향긋한 세계",
+      "category": "TRAVEL",
+      "image": "./sample/sample_photo.jpg",
+      "size": "portrait",
+      "page_number": "Vol. 03"
+    },
+    {
+      "template": "feed_minimal",
+      "title": "좋은 글은 마음을\n한 뼘 넓혀준다",
+      "author": "어느 독자의 편지",
+      "show_quote_mark": true,
+      "bg_color": "#faf8f5",
+      "accent_color": "#c4a882"
+    },
+    {
+      "template": "feed_split",
+      "title": "필름 카메라로\n담아낸 일상",
+      "body": "디지털 시대에 아날로그 감성을 고집하는 사람들의 이야기",
+      "category": "CULTURE",
+      "image": "./sample/sample_photo.jpg",
+      "size": "portrait",
+      "bg_color": "#2a2a2a"
+    }
+  ]
+}

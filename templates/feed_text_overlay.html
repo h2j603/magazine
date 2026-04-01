@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{#
+  텍스트 오버레이 레이아웃
+  - 배경 이미지 위에 반투명 오버레이 + 텍스트
+  - 매거진 스타일 타이틀 + 본문
+  용도: 감성적인 사진 위에 글귀를 얹는 피드
+#}
+
+{% block style %}
+.container {
+  position: relative;
+  width: {{ width }}px;
+  height: {{ height }}px;
+}
+
+.bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: {{ overlay_color | default('linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%)') }};
+}
+
+.content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: {{ padding | default('80px') }};
+  color: {{ text_color | default('#ffffff') }};
+}
+
+.category {
+  font-family: {{ font_family | default("'Noto Sans KR', sans-serif") }};
+  font-size: {{ category_font_size | default('24px') }};
+  font-weight: 500;
+  letter-spacing: {{ letter_spacing | default('4px') }};
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.title {
+  font-family: {{ title_font | default("'Noto Serif KR', serif") }};
+  font-size: {{ title_font_size | default('64px') }};
+  font-weight: {{ title_font_weight | default('900') }};
+  line-height: {{ title_line_height | default('1.3') }};
+  margin-bottom: 24px;
+}
+
+.body-text {
+  font-family: {{ font_family | default("'Noto Sans KR', sans-serif") }};
+  font-size: {{ body_font_size | default('28px') }};
+  font-weight: 300;
+  line-height: {{ body_line_height | default('1.8') }};
+  opacity: 0.9;
+}
+
+.divider {
+  width: 60px;
+  height: 3px;
+  background: {{ accent_color | default('#ffffff') }};
+  margin-bottom: 24px;
+}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  {% if image %}
+  <img class="bg-image" src="{{ image }}" />
+  {% endif %}
+  <div class="overlay"></div>
+  <div class="content">
+    {% if category %}
+    <div class="category">{{ category }}</div>
+    {% endif %}
+    <div class="divider"></div>
+    <div class="title">{{ title }}</div>
+    {% if body %}
+    <div class="body-text">{{ body }}</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

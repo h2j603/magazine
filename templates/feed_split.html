@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{#
+  좌우 분할 레이아웃
+  - 왼쪽 사진 + 오른쪽 텍스트 (또는 반대)
+  - 세로형(1080x1350) 피드에 적합
+  용도: 인터뷰, 제품 소개, 아티클
+#}
+
+{% block style %}
+.container {
+  width: {{ width }}px;
+  height: {{ height }}px;
+  display: flex;
+  flex-direction: {{ direction | default('row') }};
+}
+
+.image-half {
+  width: {{ image_ratio | default('50%') }};
+  height: 100%;
+  overflow: hidden;
+  order: {{ image_order | default('0') }};
+}
+
+.image-half img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-half {
+  width: {{ text_ratio | default('50%') }};
+  height: 100%;
+  background: {{ bg_color | default('#1a1a1a') }};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: {{ padding | default('60px') }};
+  color: {{ text_color | default('#ffffff') }};
+}
+
+.category {
+  font-family: {{ font_family | default("'Noto Sans KR', sans-serif") }};
+  font-size: {{ category_font_size | default('18px') }};
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: {{ accent_color | default('#b08968') }};
+  margin-bottom: 24px;
+}
+
+.title {
+  font-family: {{ title_font | default("'Noto Serif KR', serif") }};
+  font-size: {{ title_font_size | default('44px') }};
+  font-weight: {{ title_font_weight | default('900') }};
+  line-height: 1.4;
+  margin-bottom: 24px;
+  word-break: keep-all;
+}
+
+.divider {
+  width: 40px;
+  height: 2px;
+  background: {{ accent_color | default('#b08968') }};
+  margin-bottom: 24px;
+}
+
+.body-text {
+  font-family: {{ font_family | default("'Noto Sans KR', sans-serif") }};
+  font-size: {{ body_font_size | default('22px') }};
+  font-weight: 300;
+  line-height: 1.8;
+  opacity: 0.85;
+}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  {% if image %}
+  <div class="image-half">
+    <img src="{{ image }}" />
+  </div>
+  {% endif %}
+  <div class="text-half">
+    {% if category %}
+    <div class="category">{{ category }}</div>
+    {% endif %}
+    <div class="title">{{ title }}</div>
+    <div class="divider"></div>
+    {% if body %}
+    <div class="body-text">{{ body }}</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

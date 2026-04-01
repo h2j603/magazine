@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{#
+  에디토리얼 레이아웃
+  - 깔끔한 배경색 + 사진 영역 + 텍스트 영역 분리
+  - 잡지 에디토리얼 느낌
+  용도: 글 중심의 매거진 피드
+#}
+
+{% block style %}
+.container {
+  width: {{ width }}px;
+  height: {{ height }}px;
+  background: {{ bg_color | default('#f5f0eb') }};
+  display: flex;
+  flex-direction: column;
+  font-family: {{ font_family | default("'Noto Sans KR', sans-serif") }};
+}
+
+.image-area {
+  width: 100%;
+  height: {{ image_height | default('55%') }};
+  overflow: hidden;
+}
+
+.image-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-area {
+  flex: 1;
+  padding: {{ padding | default('60px 72px') }};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: {{ text_color | default('#1a1a1a') }};
+}
+
+.category {
+  font-size: {{ category_font_size | default('20px') }};
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: {{ accent_color | default('#b08968') }};
+  margin-bottom: 16px;
+}
+
+.title {
+  font-family: {{ title_font | default("'Noto Serif KR', serif") }};
+  font-size: {{ title_font_size | default('52px') }};
+  font-weight: {{ title_font_weight | default('900') }};
+  line-height: 1.35;
+  margin-bottom: 20px;
+}
+
+.body-text {
+  font-size: {{ body_font_size | default('26px') }};
+  font-weight: 300;
+  line-height: 1.8;
+  color: {{ body_text_color | default('#4a4a4a') }};
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.magazine-name {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: {{ accent_color | default('#b08968') }};
+}
+
+.page-number {
+  font-family: {{ title_font | default("'Playfair Display', serif") }};
+  font-size: 16px;
+  font-style: italic;
+  color: {{ body_text_color | default('#4a4a4a') }};
+}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  {% if image %}
+  <div class="image-area">
+    <img src="{{ image }}" />
+  </div>
+  {% endif %}
+  <div class="text-area">
+    {% if category %}
+    <div class="category">{{ category }}</div>
+    {% endif %}
+    <div class="title">{{ title }}</div>
+    {% if body %}
+    <div class="body-text">{{ body }}</div>
+    {% endif %}
+    {% if magazine_name or page_number %}
+    <div class="footer">
+      <div class="magazine-name">{{ magazine_name | default('') }}</div>
+      <div class="page-number">{{ page_number | default('') }}</div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

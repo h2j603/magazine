@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{#
+  미니멀 텍스트 레이아웃
+  - 텍스트만으로 구성된 깔끔한 디자인
+  - 중앙 정렬, 여백 중심
+  용도: 인용구, 공지, 텍스트 중심 피드
+#}
+
+{% block style %}
+.container {
+  width: {{ width }}px;
+  height: {{ height }}px;
+  background: {{ bg_color | default('#ffffff') }};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: {{ padding | default('100px') }};
+  text-align: {{ text_align | default('center') }};
+}
+
+.category {
+  font-family: {{ font_family | default("'Noto Sans KR', sans-serif") }};
+  font-size: {{ category_font_size | default('20px') }};
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: {{ accent_color | default('#999999') }};
+  margin-bottom: 40px;
+}
+
+.quote-mark {
+  font-family: {{ title_font | default("'Playfair Display', serif") }};
+  font-size: 120px;
+  line-height: 0.6;
+  color: {{ accent_color | default('#e0d5c9') }};
+  margin-bottom: 30px;
+}
+
+.title {
+  font-family: {{ title_font | default("'Noto Serif KR', serif") }};
+  font-size: {{ title_font_size | default('48px') }};
+  font-weight: {{ title_font_weight | default('700') }};
+  line-height: {{ title_line_height | default('1.6') }};
+  color: {{ text_color | default('#1a1a1a') }};
+  margin-bottom: 40px;
+  word-break: keep-all;
+}
+
+.body-text {
+  font-family: {{ font_family | default("'Noto Sans KR', sans-serif") }};
+  font-size: {{ body_font_size | default('26px') }};
+  font-weight: 300;
+  line-height: 1.8;
+  color: {{ body_text_color | default('#666666') }};
+  margin-bottom: 40px;
+}
+
+.author {
+  font-family: {{ font_family | default("'Noto Sans KR', sans-serif") }};
+  font-size: 22px;
+  font-weight: 400;
+  color: {{ accent_color | default('#999999') }};
+}
+
+.author::before {
+  content: '— ';
+}
+
+.bottom-line {
+  width: 40px;
+  height: 2px;
+  background: {{ accent_color | default('#e0d5c9') }};
+  margin-top: 40px;
+}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  {% if category %}
+  <div class="category">{{ category }}</div>
+  {% endif %}
+  {% if show_quote_mark | default(false) %}
+  <div class="quote-mark">"</div>
+  {% endif %}
+  <div class="title">{{ title }}</div>
+  {% if body %}
+  <div class="body-text">{{ body }}</div>
+  {% endif %}
+  {% if author %}
+  <div class="author">{{ author }}</div>
+  {% endif %}
+  <div class="bottom-line"></div>
+</div>
+{% endblock %}
