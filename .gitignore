@@ -5,3 +5,5 @@ __pycache__/
 node_modules/
 assets/images/*
 !assets/images/.gitkeep
+*.tgz
+assets/fonts/*.otf
