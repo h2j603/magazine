@@ -3,29 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <style>
-  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
-
-  @font-face {
-    font-family: 'SunBatang';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/SunBatang-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: 'SunBatang';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/SunBatang-Medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: 'SunBatang';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/SunBatang-Bold.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
-  }
-
   {% for font_url in google_fonts_urls | default([]) %}
   @import url('{{ font_url }}');
   {% endfor %}
@@ -38,10 +15,10 @@
   {% endif %}
 
   :root {
-    /* 폰트 시스템 */
-    --font-sans: 'Pretendard', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    --font-serif: 'SunBatang', Georgia, serif;
-    --font-display: 'Helvetica Neue', Helvetica, 'Pretendard', sans-serif;
+    /* 폰트 시스템 — 시스템 설치 폰트 사용 */
+    --font-sans: 'Pretendard', -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-serif: 'Noto Serif CJK KR', Georgia, serif;
+    --font-display: 'Helvetica Neue', Helvetica, 'Pretendard', Arial, sans-serif;
 
     /* 기본 색상 */
     --color-black: #0a0a0a;
