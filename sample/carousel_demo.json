@@ -1,0 +1,66 @@
+{
+  "defaults": {
+    "size": "portrait",
+    "scale": 1,
+    "magazine_name": "DUSK"
+  },
+  "slides": [
+    {
+      "template": "cover",
+      "title": "도시의 밤,\n꺼지지 않는 불빛들",
+      "subtitle": "서울 을지로에서 만난 자정의 사람들",
+      "category": "NIGHTSCAPE",
+      "issue": "Vol. 07 — April 2026",
+      "image": "./sample/cover_city.jpg"
+    },
+    {
+      "template": "article",
+      "heading": "을지로, 자정이 지나야\n비로소 시작되는 거리",
+      "body": "낮에는 인쇄소와 철공소가 돌아가는 을지로 골목이, 밤 열한 시를 넘기면 전혀 다른 얼굴을 드러낸다.\n\n오래된 건물 2층, 간판도 없는 문을 열면 턴테이블 위에서 재즈가 흐르고, 바텐더는 말없이 잔을 닦는다. 여기 오는 사람들은 대부분 단골이다. 소개 없이는 찾기 어려운 곳.\n\n\"이 동네는 밤이 되면 비밀이 하나씩 열려요.\"\n\n을지로의 밤은 느리다. 서두르는 사람이 없다. 그래서 좋다.",
+      "page_label": "01 — NIGHTSCAPE",
+      "slide_number": "2 / 7"
+    },
+    {
+      "template": "photo",
+      "image": "./sample/cafe_warm.jpg",
+      "caption": "을지로 3가 골목 안쪽, 간판 없는 바. 자정이 넘어야 불이 켜진다.",
+      "credit": "Photo — DUSK Editorial",
+      "caption_style": "bar",
+      "slide_number": "3 / 7"
+    },
+    {
+      "template": "quote",
+      "text": "밤이 깊어질수록\n이 도시는 더 솔직해진다",
+      "source": "을지로 바텐더 K",
+      "slide_number": "4 / 7",
+      "bg_color": "#1a1a1a",
+      "text_color": "#f0ece6",
+      "accent_color": "#5a5550",
+      "source_color": "#888"
+    },
+    {
+      "template": "article",
+      "heading": "우리가 밤을 사랑하는 이유",
+      "body": "누군가에게 밤은 하루의 끝이지만, 누군가에게는 비로소 시작이다.\n\n낮 동안 감추었던 말들이 밤이 되면 자연스럽게 흘러나온다. 술 한 잔의 힘을 빌리기도 하고, 그저 어둠이 주는 안전함 때문이기도 하다.\n\n을지로의 밤 문화가 특별한 이유는 '느슨함'에 있다. 누구도 서로에게 이름을 묻지 않는다. 무엇을 하는 사람인지 궁금해하지 않는다. 그냥 이 밤, 이 공간을 함께 나누는 것으로 충분하다.",
+      "page_label": "02 — ESSAY",
+      "image": "./sample/cafe_warm.jpg",
+      "image_height": "38%",
+      "slide_number": "5 / 7"
+    },
+    {
+      "template": "photo",
+      "image": "./sample/nature_spring.jpg",
+      "caption": "새벽 4시, 을지로를 빠져나오면 만나는 청계천. 도시의 밤과 아침이 교차하는 시간.",
+      "credit": "Photo — DUSK Editorial",
+      "caption_style": "overlay",
+      "slide_number": "6 / 7"
+    },
+    {
+      "template": "ending",
+      "message": "당신의 밤은 어떤 모습인가요?\n이 글이 마음에 드셨다면\n저장하고 공유해 주세요",
+      "cta_text": "FOLLOW FOR MORE",
+      "handle": "@dusk.magazine",
+      "bg_color": "#111111"
+    }
+  ]
+}

@@ -62,14 +62,20 @@ def render_html(template_name: str, context: dict) -> str:
 
 
 def resolve_image_path(image_path: str | None) -> str | None:
-    """이미지 경로를 file:// URI로 변환합니다."""
+    """이미지 경로를 base64 data URI로 변환합니다."""
+    import base64
+    import mimetypes
+
     if not image_path:
         return None
     p = Path(image_path).resolve()
     if not p.exists():
         print(f"[경고] 이미지 파일을 찾을 수 없습니다: {p}")
         return None
-    return p.as_uri()
+    mime = mimetypes.guess_type(str(p))[0] or "image/jpeg"
+    with open(p, "rb") as f:
+        data = base64.b64encode(f.read()).decode("ascii")
+    return f"data:{mime};base64,{data}"
 
 
 def generate_image(
