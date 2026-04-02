@@ -1,65 +1,66 @@
 {% extends "base.html" %}
 {#
-  인용구 슬라이드
-  - 미니멀 타이포그래피 중심
-  - 큰 따옴표 + 인용문 + 출처
-  - 여백 중심의 깔끔한 디자인
+  인용구 슬라이드 — 대담한 타이포그래피
+  - 순바탕 Bold 대형 인용문
+  - 과감한 여백, 강렬한 인상
 #}
 
 {% block style %}
 .quote {
   width: {{ width }}px;
   height: {{ height }}px;
-  background: {{ bg_color | default('#faf9f7') }};
+  background: {{ bg_color | default('#f5f3f0') }};
   display: flex;
   flex-direction: column;
   align-items: {{ align | default('flex-start') }};
   justify-content: center;
-  padding: {{ padding | default('80px 72px') }};
+  padding: {{ padding | default('80px 64px') }};
+  position: relative;
 }
 
 .quote__mark {
-  font-family: var(--font-display);
-  font-size: {{ mark_size | default('160px') }};
+  font-family: var(--font-serif);
+  font-size: {{ mark_size | default('200px') }};
   font-weight: 700;
-  line-height: 0.7;
-  color: {{ accent_color | default('#e0dbd4') }};
-  margin-bottom: 36px;
+  line-height: 0.65;
+  color: {{ accent_color | default('#ddd8d0') }};
+  margin-bottom: 40px;
   user-select: none;
 }
 
 .quote__text {
-  font-family: var(--font-sans);
-  font-size: {{ quote_font_size | default('42px') }};
-  font-weight: {{ quote_font_weight | default('600') }};
-  line-height: {{ quote_line_height | default('1.65') }};
-  color: {{ text_color | default('#1a1a1a') }};
+  font-family: var(--font-serif);
+  font-size: {{ quote_font_size | default('54px') }};
+  font-weight: {{ quote_font_weight | default('700') }};
+  line-height: {{ quote_line_height | default('1.6') }};
+  color: {{ text_color | default('#0a0a0a') }};
   word-break: keep-all;
   white-space: pre-line;
   text-align: {{ text_align | default('left') }};
   max-width: 100%;
+  letter-spacing: -0.5px;
 }
 
 .quote__divider {
-  width: 40px;
-  height: 2px;
-  background: {{ accent_color | default('#d0cbc4') }};
-  margin: 40px 0;
+  width: 48px;
+  height: 3px;
+  background: {{ divider_color | default('#ccc5bb') }};
+  margin: 44px 0;
 }
 
 .quote__source {
   font-family: var(--font-sans);
-  font-size: {{ source_font_size | default('22px') }};
-  font-weight: 400;
-  color: {{ source_color | default('#888888') }};
+  font-size: {{ source_font_size | default('24px') }};
+  font-weight: 500;
+  color: {{ source_color | default('#888') }};
   letter-spacing: 0.5px;
 }
 
 .quote__footer {
   position: absolute;
-  bottom: 48px;
-  left: 72px;
-  right: 72px;
+  bottom: 44px;
+  left: 64px;
+  right: 64px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -68,22 +69,22 @@
 .quote__magazine {
   font-family: var(--font-display);
   font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 2px;
+  font-weight: 700;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  color: {{ accent_color | default('#c0bbb4') }};
+  color: {{ footer_color | default('#ccc5bb') }};
 }
 
 .quote__slide-num {
   font-family: var(--font-display);
   font-size: 14px;
-  font-weight: 400;
-  color: {{ accent_color | default('#c0bbb4') }};
+  font-weight: 500;
+  color: {{ footer_color | default('#ccc5bb') }};
 }
 {% endblock %}
 
 {% block body %}
-<div class="quote" style="position:relative;">
+<div class="quote">
   {% if show_mark | default(true) %}
   <div class="quote__mark">"</div>
   {% endif %}

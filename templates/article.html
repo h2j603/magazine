@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 {#
-  본문 슬라이드 (에디토리얼 텍스트 페이지)
-  - 깔끔한 배경 위 본문 텍스트 중심
-  - 선택적 상단 이미지
-  - 텍스트 힙 트렌드 반영: 가독성 최우선
+  본문 슬라이드 — 에디토리얼 텍스트 페이지
+  - 순바탕으로 제목, Pretendard로 본문
+  - 넉넉한 여백, 큰 활자, 조판 중심
 #}
 
 {% block style %}
 .article {
   width: {{ width }}px;
   height: {{ height }}px;
-  background: {{ bg_color | default('#faf9f7') }};
+  background: {{ bg_color | default('#f5f3f0') }};
   display: flex;
   flex-direction: column;
 }
@@ -18,7 +17,7 @@
 {% if image %}
 .article__image {
   width: 100%;
-  height: {{ image_height | default('45%') }};
+  height: {{ image_height | default('42%') }};
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -32,48 +31,52 @@
 
 .article__body {
   flex: 1;
-  padding: {{ padding | default('56px 64px') }};
+  padding: {{ padding | default('52px 60px') }};
   display: flex;
   flex-direction: column;
-  justify-content: {{ vertical_align | default('center') }};
+  justify-content: {{ vertical_align | default('flex-start') }};
 }
 
 .article__page {
   font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 3px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: {{ accent_color | default('#999999') }};
-  margin-bottom: 32px;
+  color: {{ accent_color | default('#aaa') }};
+  margin-bottom: 36px;
 }
 
 .article__heading {
-  font-family: var(--font-sans);
-  font-size: {{ heading_font_size | default('38px') }};
+  font-family: var(--font-serif);
+  font-size: {{ heading_font_size | default('46px') }};
   font-weight: 700;
-  line-height: 1.45;
-  color: {{ heading_color | default('#1a1a1a') }};
-  margin-bottom: 28px;
+  line-height: 1.4;
+  color: {{ heading_color | default('#0a0a0a') }};
+  margin-bottom: 36px;
   word-break: keep-all;
+  letter-spacing: -0.5px;
 }
 
 .article__text {
   font-family: var(--font-sans);
-  font-size: {{ text_font_size | default('24px') }};
+  font-size: {{ text_font_size | default('26px') }};
   font-weight: 400;
-  line-height: {{ text_line_height | default('1.9') }};
-  color: {{ text_color | default('#3a3a3a') }};
+  line-height: {{ text_line_height | default('2.0') }};
+  color: {{ text_color | default('#2a2a2a') }};
   word-break: keep-all;
   white-space: pre-line;
 }
 
-.article__text p {
-  margin-bottom: 24px;
-}
-
-.article__text p:last-child {
-  margin-bottom: 0;
+.article__dropcap::first-letter {
+  font-family: var(--font-serif);
+  font-size: 3.2em;
+  font-weight: 700;
+  float: left;
+  line-height: 0.85;
+  margin-right: 8px;
+  margin-top: 6px;
+  color: {{ heading_color | default('#0a0a0a') }};
 }
 
 .article__footer {
@@ -87,17 +90,17 @@
 .article__magazine {
   font-family: var(--font-display);
   font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 2px;
+  font-weight: 700;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  color: {{ accent_color | default('#999999') }};
+  color: {{ accent_color | default('#bbb') }};
 }
 
 .article__slide-num {
   font-family: var(--font-display);
   font-size: 14px;
-  font-weight: 400;
-  color: {{ accent_color | default('#999999') }};
+  font-weight: 500;
+  color: {{ accent_color | default('#bbb') }};
 }
 {% endblock %}
 
@@ -118,7 +121,7 @@
     <div class="article__heading">{{ heading }}</div>
     {% endif %}
 
-    <div class="article__text">{{ body }}</div>
+    <div class="article__text {{ 'article__dropcap' if dropcap | default(false) else '' }}">{{ body }}</div>
 
     {% if magazine_name or slide_number %}
     <div class="article__footer">

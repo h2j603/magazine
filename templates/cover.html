@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {#
-  매거진 표지 (캐러셀 첫 번째 슬라이드)
-  - 풀 이미지 배경 + 검정 그라디언트 + 흰색 텍스트
-  - 매거진명, 카테고리, 제목, 부제
+  매거진 표지 — 예술/디자인 매거진
+  - 풀 이미지 + 검정 그라디언트 + 대형 흰색 타이틀
+  - 순바탕 Bold로 제목, Helvetica로 라벨
 #}
 
 {% block style %}
@@ -27,7 +27,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: {{ gradient | default('linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.85) 100%)') }};
+  background: {{ gradient | default('linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.0) 25%, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.75) 75%, rgba(0,0,0,0.92) 100%)') }};
 }
 
 .cover__top {
@@ -35,7 +35,7 @@
   top: 0;
   left: 0;
   right: 0;
-  padding: 56px 64px 0;
+  padding: {{ top_padding | default('52px 56px 0') }};
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -43,19 +43,20 @@
 
 .cover__logo {
   font-family: var(--font-display);
-  font-size: {{ logo_font_size | default('28px') }};
+  font-size: {{ logo_font_size | default('32px') }};
   font-weight: 800;
-  letter-spacing: {{ logo_letter_spacing | default('6px') }};
+  letter-spacing: {{ logo_letter_spacing | default('8px') }};
   text-transform: uppercase;
   color: #ffffff;
 }
 
 .cover__issue {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   letter-spacing: 2px;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255,255,255,0.7);
+  text-align: right;
 }
 
 .cover__content {
@@ -63,54 +64,54 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: {{ padding | default('64px') }};
+  padding: {{ padding | default('0 56px 56px') }};
   color: #ffffff;
 }
 
 .cover__category {
   font-family: var(--font-display);
-  font-size: {{ category_font_size | default('20px') }};
-  font-weight: 600;
-  letter-spacing: 4px;
+  font-size: {{ category_font_size | default('22px') }};
+  font-weight: 700;
+  letter-spacing: 5px;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   opacity: 0.85;
 }
 
 .cover__divider {
-  width: 48px;
+  width: 56px;
   height: {{ divider_height | default('3px') }};
   background: {{ accent_color | default('#ffffff') }};
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
 
 .cover__title {
-  font-family: var(--font-sans);
-  font-size: {{ title_font_size | default('62px') }};
-  font-weight: {{ title_font_weight | default('800') }};
-  line-height: {{ title_line_height | default('1.35') }};
-  letter-spacing: {{ title_letter_spacing | default('-0.5px') }};
-  margin-bottom: 20px;
+  font-family: var(--font-serif);
+  font-size: {{ title_font_size | default('76px') }};
+  font-weight: {{ title_font_weight | default('700') }};
+  line-height: {{ title_line_height | default('1.3') }};
+  letter-spacing: {{ title_letter_spacing | default('-1px') }};
+  margin-bottom: 24px;
   word-break: keep-all;
 }
 
 .cover__subtitle {
   font-family: var(--font-sans);
-  font-size: {{ subtitle_font_size | default('26px') }};
-  font-weight: 400;
-  line-height: 1.6;
-  opacity: 0.85;
+  font-size: {{ subtitle_font_size | default('28px') }};
+  font-weight: 500;
+  line-height: 1.5;
+  opacity: 0.8;
 }
 
 .cover__swipe {
   position: absolute;
   bottom: 20px;
-  right: 64px;
+  right: 56px;
   font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.5);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.4);
   text-transform: uppercase;
 }
 {% endblock %}
@@ -120,7 +121,7 @@
   {% if image %}
   <img class="cover__bg" src="{{ image }}" />
   {% else %}
-  <div style="width:100%;height:100%;background:{{ bg_color | default('#1a1a1a') }};position:absolute;top:0;left:0;"></div>
+  <div style="width:100%;height:100%;background:{{ bg_color | default('#0a0a0a') }};position:absolute;top:0;left:0;"></div>
   {% endif %}
   <div class="cover__gradient"></div>
 

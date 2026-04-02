@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {#
   사진 + 캡션 슬라이드
-  - 풀 이미지 + 하단 캡션 스트립
-  - 또는 이미지 + 상단 제목 오버레이
+  - 풀 이미지 + 하단 캡션 스트립 (or 오버레이)
+  - 캡션에 순바탕 활용
 #}
 
 {% block style %}
@@ -10,43 +10,44 @@
   position: relative;
   width: {{ width }}px;
   height: {{ height }}px;
-  background: {{ bg_color | default('#1a1a1a') }};
+  background: {{ bg_color | default('#0a0a0a') }};
 }
 
 .photo__image {
   width: 100%;
-  height: {{ image_height | default('82%') }};
+  height: {{ image_height | default('80%') }};
   object-fit: cover;
 }
 
 .photo__caption-bar {
-  height: {{ caption_height | default('18%') }};
-  background: {{ caption_bg | default('#ffffff') }};
-  padding: 0 64px;
+  height: {{ caption_height | default('20%') }};
+  background: {{ caption_bg | default('#f5f3f0') }};
+  padding: 0 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .photo__caption {
-  font-family: var(--font-sans);
-  font-size: {{ caption_font_size | default('22px') }};
-  font-weight: 400;
+  font-family: var(--font-serif);
+  font-size: {{ caption_font_size | default('24px') }};
+  font-weight: 500;
   line-height: 1.6;
-  color: {{ caption_color | default('#3a3a3a') }};
+  color: {{ caption_color | default('#2a2a2a') }};
   word-break: keep-all;
 }
 
 .photo__credit {
   font-family: var(--font-display);
   font-size: 14px;
-  font-weight: 400;
-  color: {{ credit_color | default('#aaaaaa') }};
-  margin-top: 8px;
-  letter-spacing: 0.5px;
+  font-weight: 500;
+  color: {{ credit_color | default('#aaa') }};
+  margin-top: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-/* 오버레이 캡션 스타일 (caption_style="overlay" 일 때) */
+/* 오버레이 스타일 */
 .photo--overlay .photo__image {
   height: 100%;
   position: absolute;
@@ -59,8 +60,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 40%;
-  background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+  height: 45%;
+  background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
 }
 
 .photo--overlay .photo__caption-overlay {
@@ -68,30 +69,30 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 48px 64px;
+  padding: 48px 60px;
   color: #ffffff;
 }
 
 .photo--overlay .photo__caption {
   color: #ffffff;
+  font-size: {{ caption_font_size | default('26px') }};
 }
 
 .photo--overlay .photo__credit {
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.5);
 }
 
-/* 슬라이드 넘버 */
 .photo__footer {
   position: absolute;
-  bottom: 12px;
-  right: 64px;
+  bottom: 14px;
+  right: 60px;
 }
 
 .photo__slide-num {
   font-family: var(--font-display);
   font-size: 14px;
-  font-weight: 400;
-  color: {{ accent_color | default('#aaaaaa') }};
+  font-weight: 500;
+  color: {{ accent_color | default('#aaa') }};
 }
 {% endblock %}
 
