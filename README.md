@@ -1,6 +1,10 @@
 # Instagram Magazine Feed Generator
 
-HTML/CSS 템플릿 + Playwright를 사용해 인스타그램 피드 이미지를 생성하는 도구입니다.
+HTML/CSS 템플릿 + Playwright 기반 인스타그램 매거진 캐러셀 이미지 생성기.
+
+- **폰트**: 영문 Helvetica / 한글 Pretendard (CDN)
+- **기본 규격**: 1080x1350 (4:5 세로형, 피드 최대 점유율)
+- **캐러셀 매거진 구조**: 표지 → 본문 → 인용 → 사진 → 마무리
 
 ## 설치
 
@@ -11,57 +15,62 @@ playwright install chromium
 
 ## 사용법
 
-### CLI로 단일 이미지 생성
+### 캐러셀 일괄 생성 (JSON config)
 
 ```bash
-python generate.py --template feed_minimal \
-  --title "좋은 글은 마음을 한 뼘 넓혀준다" \
-  --body "어느 독자의 편지에서" \
-  --size square
-
-python generate.py --template feed_text_overlay \
-  --title "봄이 오는 길목에서" \
-  --body "따뜻한 바람이 불어오는 계절" \
-  --image ./photos/spring.jpg \
-  --category "ESSAY" \
-  --size portrait
+python generate.py carousel.json
 ```
 
-### JSON 설정으로 일괄 생성
+`sample/config_example.json` 참고:
+
+```json
+{
+  "defaults": {
+    "size": "portrait",
+    "magazine_name": "YOUR MAGAZINE"
+  },
+  "slides": [
+    { "template": "cover",   "title": "제목", "image": "./photo.jpg", "category": "ESSAY" },
+    { "template": "article", "heading": "소제목", "body": "본문 텍스트..." },
+    { "template": "quote",   "text": "인용구", "source": "출처" },
+    { "template": "ending",  "message": "저장하고 공유해 주세요", "cta_text": "FOLLOW" }
+  ]
+}
+```
+
+### CLI 단일 이미지 생성
 
 ```bash
-python generate.py config.json
+# 표지
+python generate.py -t cover --title "봄의 시작" --image photo.jpg --category "ESSAY"
+
+# 인용구 (다크 모드)
+python generate.py -t quote --title "x" \
+  -e '{"text": "좋은 글은 마음을 넓혀준다", "source": "독자", "bg_color": "#1a1a1a", "text_color": "#fff"}'
 ```
 
-`sample/config_example.json` 참고.
+## 캐러셀 매거진 템플릿
 
-## 템플릿
+| 템플릿 | 설명 | 슬라이드 위치 |
+|--------|------|--------------|
+| `cover` | 이미지 + 검정 그라디언트 + 흰색 타이틀 | 첫 번째 (표지) |
+| `article` | 에디토리얼 텍스트 페이지 (선택적 상단 이미지) | 본문 |
+| `quote` | 미니멀 인용구 + 출처 | 중간 브레이크 |
+| `photo` | 풀 이미지 + 캡션바 또는 오버레이 | 사진 중심 |
+| `ending` | 매거진명 + CTA (팔로우/저장 유도) | 마지막 |
 
-| 템플릿 | 설명 | 추천 용도 |
-|--------|------|-----------|
-| `feed_text_overlay` | 배경 이미지 위 반투명 오버레이 + 텍스트 | 감성 사진 + 글귀 |
-| `feed_editorial` | 사진/텍스트 분리형 에디토리얼 | 아티클, 리뷰 |
-| `feed_minimal` | 텍스트 중심 미니멀 | 인용구, 공지 |
-| `feed_split` | 좌우 분할 | 인터뷰, 제품 소개 |
-
-## 규격
+## 이미지 규격
 
 | 이름 | 크기 | 비율 | 용도 |
 |------|------|------|------|
-| `square` | 1080x1080 | 1:1 | 피드 (기본) |
-| `portrait` | 1080x1350 | 4:5 | 피드 세로형 |
+| `portrait` | 1080x1350 | 4:5 | 피드 세로형 (기본) |
+| `square` | 1080x1080 | 1:1 | 피드 정사각형 |
 | `story` | 1080x1920 | 9:16 | 스토리/릴스 |
 
 ## 커스터마이징
 
-모든 템플릿 변수는 `--extra` 옵션(JSON)이나 config 파일에서 오버라이드할 수 있습니다:
+`--extra`(JSON) 또는 config 파일에서 모든 CSS 변수를 오버라이드 가능:
 
-```bash
-python generate.py -t feed_minimal \
-  --title "제목" \
-  -e '{"bg_color": "#1a1a1a", "text_color": "#ffffff", "title_font_size": "72px"}'
-```
+`bg_color`, `text_color`, `accent_color`, `title_font_size`, `padding`, `gradient` 등.
 
-주요 변수: `bg_color`, `text_color`, `accent_color`, `font_family`, `title_font`, `title_font_size`, `body_font_size`, `padding` 등.
-
-커스텀 폰트는 `assets/fonts/`에 파일을 넣고 `custom_font_url` 경로를 지정하면 됩니다.
+커스텀 폰트는 `assets/fonts/`에 넣고 `custom_font_url` 지정.

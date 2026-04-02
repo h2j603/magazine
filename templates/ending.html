@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{#
+  마무리/CTA 슬라이드 (캐러셀 마지막)
+  - 매거진명 + 팔로우/저장 유도 문구
+  - 미니멀하고 임팩트 있는 마무리
+#}
+
+{% block style %}
+.ending {
+  width: {{ width }}px;
+  height: {{ height }}px;
+  background: {{ bg_color | default('#1a1a1a') }};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: {{ padding | default('80px') }};
+  text-align: center;
+  position: relative;
+}
+
+.ending__logo {
+  font-family: var(--font-display);
+  font-size: {{ logo_font_size | default('36px') }};
+  font-weight: 800;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: {{ logo_color | default('#ffffff') }};
+  margin-bottom: 48px;
+}
+
+.ending__divider {
+  width: 48px;
+  height: 2px;
+  background: {{ accent_color | default('rgba(255,255,255,0.3)') }};
+  margin-bottom: 48px;
+}
+
+.ending__message {
+  font-family: var(--font-sans);
+  font-size: {{ message_font_size | default('28px') }};
+  font-weight: 400;
+  line-height: 1.8;
+  color: {{ message_color | default('rgba(255,255,255,0.7)') }};
+  word-break: keep-all;
+  white-space: pre-line;
+  margin-bottom: 56px;
+}
+
+.ending__cta {
+  font-family: var(--font-sans);
+  font-size: {{ cta_font_size | default('20px') }};
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: {{ cta_color | default('#ffffff') }};
+  border: 1.5px solid {{ cta_border_color | default('rgba(255,255,255,0.4)') }};
+  padding: 18px 40px;
+  display: inline-block;
+}
+
+.ending__handle {
+  position: absolute;
+  bottom: 48px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 400;
+  color: {{ handle_color | default('rgba(255,255,255,0.35)') }};
+  letter-spacing: 1px;
+}
+{% endblock %}
+
+{% block body %}
+<div class="ending">
+  {% if magazine_name %}
+  <div class="ending__logo">{{ magazine_name }}</div>
+  {% endif %}
+
+  <div class="ending__divider"></div>
+
+  {% if message %}
+  <div class="ending__message">{{ message }}</div>
+  {% endif %}
+
+  {% if cta_text %}
+  <div class="ending__cta">{{ cta_text }}</div>
+  {% endif %}
+
+  {% if handle %}
+  <div class="ending__handle">{{ handle }}</div>
+  {% endif %}
+</div>
+{% endblock %}

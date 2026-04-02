@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{#
+  인용구 슬라이드
+  - 미니멀 타이포그래피 중심
+  - 큰 따옴표 + 인용문 + 출처
+  - 여백 중심의 깔끔한 디자인
+#}
+
+{% block style %}
+.quote {
+  width: {{ width }}px;
+  height: {{ height }}px;
+  background: {{ bg_color | default('#faf9f7') }};
+  display: flex;
+  flex-direction: column;
+  align-items: {{ align | default('flex-start') }};
+  justify-content: center;
+  padding: {{ padding | default('80px 72px') }};
+}
+
+.quote__mark {
+  font-family: var(--font-display);
+  font-size: {{ mark_size | default('160px') }};
+  font-weight: 700;
+  line-height: 0.7;
+  color: {{ accent_color | default('#e0dbd4') }};
+  margin-bottom: 36px;
+  user-select: none;
+}
+
+.quote__text {
+  font-family: var(--font-sans);
+  font-size: {{ quote_font_size | default('42px') }};
+  font-weight: {{ quote_font_weight | default('600') }};
+  line-height: {{ quote_line_height | default('1.65') }};
+  color: {{ text_color | default('#1a1a1a') }};
+  word-break: keep-all;
+  white-space: pre-line;
+  text-align: {{ text_align | default('left') }};
+  max-width: 100%;
+}
+
+.quote__divider {
+  width: 40px;
+  height: 2px;
+  background: {{ accent_color | default('#d0cbc4') }};
+  margin: 40px 0;
+}
+
+.quote__source {
+  font-family: var(--font-sans);
+  font-size: {{ source_font_size | default('22px') }};
+  font-weight: 400;
+  color: {{ source_color | default('#888888') }};
+  letter-spacing: 0.5px;
+}
+
+.quote__footer {
+  position: absolute;
+  bottom: 48px;
+  left: 72px;
+  right: 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quote__magazine {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: {{ accent_color | default('#c0bbb4') }};
+}
+
+.quote__slide-num {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 400;
+  color: {{ accent_color | default('#c0bbb4') }};
+}
+{% endblock %}
+
+{% block body %}
+<div class="quote" style="position:relative;">
+  {% if show_mark | default(true) %}
+  <div class="quote__mark">"</div>
+  {% endif %}
+
+  <div class="quote__text">{{ text }}</div>
+
+  <div class="quote__divider"></div>
+
+  {% if source %}
+  <div class="quote__source">{{ source }}</div>
+  {% endif %}
+
+  {% if magazine_name or slide_number %}
+  <div class="quote__footer">
+    <div class="quote__magazine">{{ magazine_name | default('') }}</div>
+    <div class="quote__slide-num">{{ slide_number | default('') }}</div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

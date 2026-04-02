@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{#
+  매거진 표지 (캐러셀 첫 번째 슬라이드)
+  - 풀 이미지 배경 + 검정 그라디언트 + 흰색 텍스트
+  - 매거진명, 카테고리, 제목, 부제
+#}
+
+{% block style %}
+.cover {
+  position: relative;
+  width: {{ width }}px;
+  height: {{ height }}px;
+}
+
+.cover__bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.cover__gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: {{ gradient | default('linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.85) 100%)') }};
+}
+
+.cover__top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 56px 64px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cover__logo {
+  font-family: var(--font-display);
+  font-size: {{ logo_font_size | default('28px') }};
+  font-weight: 800;
+  letter-spacing: {{ logo_letter_spacing | default('6px') }};
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.cover__issue {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.8);
+}
+
+.cover__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: {{ padding | default('64px') }};
+  color: #ffffff;
+}
+
+.cover__category {
+  font-family: var(--font-display);
+  font-size: {{ category_font_size | default('20px') }};
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 0.85;
+}
+
+.cover__divider {
+  width: 48px;
+  height: {{ divider_height | default('3px') }};
+  background: {{ accent_color | default('#ffffff') }};
+  margin-bottom: 28px;
+}
+
+.cover__title {
+  font-family: var(--font-sans);
+  font-size: {{ title_font_size | default('62px') }};
+  font-weight: {{ title_font_weight | default('800') }};
+  line-height: {{ title_line_height | default('1.35') }};
+  letter-spacing: {{ title_letter_spacing | default('-0.5px') }};
+  margin-bottom: 20px;
+  word-break: keep-all;
+}
+
+.cover__subtitle {
+  font-family: var(--font-sans);
+  font-size: {{ subtitle_font_size | default('26px') }};
+  font-weight: 400;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.cover__swipe {
+  position: absolute;
+  bottom: 20px;
+  right: 64px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+}
+{% endblock %}
+
+{% block body %}
+<div class="cover">
+  {% if image %}
+  <img class="cover__bg" src="{{ image }}" />
+  {% else %}
+  <div style="width:100%;height:100%;background:{{ bg_color | default('#1a1a1a') }};position:absolute;top:0;left:0;"></div>
+  {% endif %}
+  <div class="cover__gradient"></div>
+
+  <div class="cover__top">
+    {% if magazine_name %}
+    <div class="cover__logo">{{ magazine_name }}</div>
+    {% endif %}
+    {% if issue %}
+    <div class="cover__issue">{{ issue }}</div>
+    {% endif %}
+  </div>
+
+  <div class="cover__content">
+    {% if category %}
+    <div class="cover__category">{{ category }}</div>
+    {% endif %}
+    <div class="cover__divider"></div>
+    <div class="cover__title">{{ title }}</div>
+    {% if subtitle %}
+    <div class="cover__subtitle">{{ subtitle }}</div>
+    {% endif %}
+  </div>
+
+  {% if show_swipe | default(true) %}
+  <div class="cover__swipe">Swipe →</div>
+  {% endif %}
+</div>
+{% endblock %}

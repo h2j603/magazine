@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{#
+  본문 슬라이드 (에디토리얼 텍스트 페이지)
+  - 깔끔한 배경 위 본문 텍스트 중심
+  - 선택적 상단 이미지
+  - 텍스트 힙 트렌드 반영: 가독성 최우선
+#}
+
+{% block style %}
+.article {
+  width: {{ width }}px;
+  height: {{ height }}px;
+  background: {{ bg_color | default('#faf9f7') }};
+  display: flex;
+  flex-direction: column;
+}
+
+{% if image %}
+.article__image {
+  width: 100%;
+  height: {{ image_height | default('45%') }};
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.article__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+{% endif %}
+
+.article__body {
+  flex: 1;
+  padding: {{ padding | default('56px 64px') }};
+  display: flex;
+  flex-direction: column;
+  justify-content: {{ vertical_align | default('center') }};
+}
+
+.article__page {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: {{ accent_color | default('#999999') }};
+  margin-bottom: 32px;
+}
+
+.article__heading {
+  font-family: var(--font-sans);
+  font-size: {{ heading_font_size | default('38px') }};
+  font-weight: 700;
+  line-height: 1.45;
+  color: {{ heading_color | default('#1a1a1a') }};
+  margin-bottom: 28px;
+  word-break: keep-all;
+}
+
+.article__text {
+  font-family: var(--font-sans);
+  font-size: {{ text_font_size | default('24px') }};
+  font-weight: 400;
+  line-height: {{ text_line_height | default('1.9') }};
+  color: {{ text_color | default('#3a3a3a') }};
+  word-break: keep-all;
+  white-space: pre-line;
+}
+
+.article__text p {
+  margin-bottom: 24px;
+}
+
+.article__text p:last-child {
+  margin-bottom: 0;
+}
+
+.article__footer {
+  margin-top: auto;
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.article__magazine {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: {{ accent_color | default('#999999') }};
+}
+
+.article__slide-num {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 400;
+  color: {{ accent_color | default('#999999') }};
+}
+{% endblock %}
+
+{% block body %}
+<div class="article">
+  {% if image %}
+  <div class="article__image">
+    <img src="{{ image }}" />
+  </div>
+  {% endif %}
+
+  <div class="article__body">
+    {% if page_label %}
+    <div class="article__page">{{ page_label }}</div>
+    {% endif %}
+
+    {% if heading %}
+    <div class="article__heading">{{ heading }}</div>
+    {% endif %}
+
+    <div class="article__text">{{ body }}</div>
+
+    {% if magazine_name or slide_number %}
+    <div class="article__footer">
+      <div class="article__magazine">{{ magazine_name | default('') }}</div>
+      <div class="article__slide-num">{{ slide_number | default('') }}</div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
